@@ -3,14 +3,24 @@ apk upgrade
 apk add mariadb
 apk add mariadb-client
 
-rc-service mariadb setup
-rc-service mariadb start
+sed -i 's/skip-networking/#skip-networking/' /etc/my.cnf.d/mariadb-server.cnf
+sed -i 's/#bind-address/bind-address/' /etc/my.cnf.d/mariadb-server.cnf
 
-sed -i 's/^#bind-address/bind-address/g' /etc/my.cnf.d/mariadb-server.cnf
+mysql_secure_installation << EOF
 
-echo 'create database wpdb;' | mariadb
-echo "create user 'jeongwok42'@'localhost' identified by 'jeongwok42'" | mariadb
-echo 'grant all privileges on wpdb.* to jeongwok42@localhost;' | mariadb
-echo 'flush privileges;' | mariadb
+Y
+Y
+jeongwok42
+jeongwok42
+Y
+Y
+Y
+Y
+EOF
 
-rc-update add mariadb default
+mariadb << EOF
+CREATE DATABASE wpdb;
+CREATE USER 'jeongwok42'@'localhost' IDENTIFIED BY 'jeongwok42'
+GRANT ALL PRIVILEGES ON wpdb.* TO jeongwok42@localhost;
+FLUSH PRIVILEGES;
+EOF
