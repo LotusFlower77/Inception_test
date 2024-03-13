@@ -18,8 +18,8 @@ sed -i 's/^;listen.owner = nobody/listen.owner = www-data/' /etc/php82/php-fpm.d
 sed -i 's/^;listen.group = nobody/listen.group = www-data/' /etc/php82/php-fpm.d/www.conf
 sed -i 's/^;listen.mode/listen.mode/' /etc/php82/php-fpm.d/www.conf
 
-chmod 744 /home/wp-cli.phar
-mv /home/wp-cli.phar /usr/local/bin/wp
+chmod 744 /root/wp-cli.phar
+mv /root/wp-cli.phar /usr/bin/wp
 
 wp core download --path=/var/www/html
 wp config create --path=/var/www/html --dbname=wpdb --dbuser=jeongwok --dbpass=jeongwok
