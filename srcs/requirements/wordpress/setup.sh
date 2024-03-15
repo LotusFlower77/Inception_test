@@ -11,7 +11,6 @@ apk add php82-phar
 
 ln -s /usr/bin/php82 /usr/bin/php
 
-sed -i 's/^listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm82\/php-fpm.sock/' /etc/php82/php-fpm.d/www.conf
 sed -i 's/^user = nobody/user = www-data/' /etc/php82/php-fpm.d/www.conf
 sed -i 's/^group = nobody/group = www-data/' /etc/php82/php-fpm.d/www.conf
 sed -i 's/^;listen.owner = nobody/listen.owner = www-data/' /etc/php82/php-fpm.d/www.conf
